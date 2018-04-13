@@ -1,0 +1,11 @@
+<litepal>
+    <dbname value = "QiXiang"/>
+
+    <version value = "1"/>
+
+    <list>
+        <maping class = "com.pmy.weather.db.City"/>
+        <maping class = "com.pmy.weather.db.County"/>
+    </list>
+
+</litepal>
