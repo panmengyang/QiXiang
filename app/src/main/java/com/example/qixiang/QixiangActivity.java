@@ -1,5 +1,6 @@
 package com.example.qixiang;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.qixiang.gson.DS;
 import com.example.qixiang.gson.QiXiang;
+import com.example.qixiang.service.AutoUpdateService;
 import com.example.qixiang.util.HttpUtil;
 import com.example.qixiang.util.Utility;
 
@@ -230,38 +232,44 @@ public class QixiangActivity extends AppCompatActivity {
     }
 
     private void showQiXiangInfo(DS ds){
-        String stationName = ds.Station_Id_C;
-        String degree = ds.TEM;
-        String fengtext = ds.WIN_S_Max;
-        String shitext = ds.RHU;
-        String yatext = ds.PRS;
-        String dsmax = ds.WIN_D_S_Max;
-        String sinstmax = ds.WIN_S_INST_Max;
-        String dinstmax = ds.WIN_D_INST_Max;
-        String savg = ds.WIN_S_Avg_2mi;
-        String davg = ds.WIN_D_Avg_2mi;
-        String rhumin = ds.RHU_Min;
-        String pre1hour = ds.PRE_1h;
-        String prsmax = ds.PRS_Max;
-        String prsmin = ds.PRS_Min;
-        String prssea = ds.PRS_Sea;
-        String vap1 = ds.VAP;
-        titleCity.setText(stationName);
-        degreeText.setText(degree);
-        fengText.setText(fengtext);
-        shiText.setText(shitext);
-        yaText.setText(yatext);
-        winds.setText(dsmax);
-        sInst.setText(sinstmax);
-        dInst.setText(dinstmax);
-        sAvg.setText(savg);
-        dAvg.setText(davg);
-        rhuMin.setText(rhumin);
-        pre1h.setText(pre1hour);
-        prsMax.setText(prsmax);
-        prsMin.setText(prsmin);
-        prsSea.setText(prssea);
-        vap.setText(vap1);
-        qixiangLayout.setVisibility(View.VISIBLE);
+        if (ds != null) {
+            String stationName = ds.Station_Id_C;
+            String degree = ds.TEM;
+            String fengtext = ds.WIN_S_Max;
+            String shitext = ds.RHU;
+            String yatext = ds.PRS;
+            String dsmax = ds.WIN_D_S_Max;
+            String sinstmax = ds.WIN_S_INST_Max;
+            String dinstmax = ds.WIN_D_INST_Max;
+            String savg = ds.WIN_S_Avg_2mi;
+            String davg = ds.WIN_D_Avg_2mi;
+            String rhumin = ds.RHU_Min;
+            String pre1hour = ds.PRE_1h;
+            String prsmax = ds.PRS_Max;
+            String prsmin = ds.PRS_Min;
+            String prssea = ds.PRS_Sea;
+            String vap1 = ds.VAP;
+            titleCity.setText(stationName);
+            degreeText.setText(degree);
+            fengText.setText(fengtext);
+            shiText.setText(shitext);
+            yaText.setText(yatext);
+            winds.setText(dsmax);
+            sInst.setText(sinstmax);
+            dInst.setText(dinstmax);
+            sAvg.setText(savg);
+            dAvg.setText(davg);
+            rhuMin.setText(rhumin);
+            pre1h.setText(pre1hour);
+            prsMax.setText(prsmax);
+            prsMin.setText(prsmin);
+            prsSea.setText(prssea);
+            vap.setText(vap1);
+            qixiangLayout.setVisibility(View.VISIBLE);
+            Intent intent = new Intent(this, AutoUpdateService.class);
+            startService(intent);
+        } else {
+            Toast.makeText(QixiangActivity.this,"获取气象信息失败",Toast.LENGTH_SHORT).show();
+        }
     }
 }

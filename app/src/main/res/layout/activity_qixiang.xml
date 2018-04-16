@@ -39,11 +39,12 @@
 
                         <Button
                             android:id="@+id/nav_button"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             android:layout_alignParentLeft="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="10dp" />
+                            android:layout_marginLeft="20dp"
+                            android:background="@drawable/ic_list"/>
 
                         <TextView
                             android:id="@+id/title_city"
@@ -418,7 +419,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
-                                android:layout_toRightOf="@id/pre_1h"
+                                android:layout_toRightOf="@id/pre_1h_text"
                                 android:textColor="#fff"
                                 android:textSize="15sp" />
 
@@ -583,7 +584,7 @@
             android:layout_height="match_parent"
             android:id="@+id/choose_area_fragment"
             android:name="com.example.qixiang.ChooseAreaFragment"
-            android:layout_gravity="start"/>
+            android:layout_gravity="start" />
 
     </android.support.v4.widget.DrawerLayout>
 
