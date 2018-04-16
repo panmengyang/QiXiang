@@ -28,7 +28,7 @@ public class County extends DataSupport {
         return stationId;
     }
 
-    public void setStationId(String weatherId) {
+    public void setStationId(String stationId) {
         this.stationId = stationId;
     }
 

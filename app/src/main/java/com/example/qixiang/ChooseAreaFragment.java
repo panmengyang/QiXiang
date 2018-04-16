@@ -2,6 +2,7 @@ package com.example.qixiang;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -64,6 +65,13 @@ public class ChooseAreaFragment extends Fragment{
                 if (currentLevel == LEVEL_CITY) {
                     selectedCity = cityList.get(position);
                     queryCounties();
+                }
+                else if (currentLevel == LEVEL_COUNTY) {
+                    String stationId = countyList.get(position).getStationId();
+                    Intent intent = new Intent(getActivity(),QixiangActivity.class);
+                    intent.putExtra("station_id",stationId);
+                    startActivity(intent);
+                    getActivity().finish();
                 }
             }
         });

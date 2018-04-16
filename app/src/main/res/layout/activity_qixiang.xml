@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/bing_pic_img"
+        android:scaleType="centerCrop"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/qixiang_layout"
+        android:scrollbars="none"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:fitsSystemWindows="true">
+
+                <TextView
+                    android:id="@+id/title_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:gravity="center"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/degree_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="#fff"
+                    android:textSize="80sp"
+                    android:paddingTop="100dp"
+                    android:paddingBottom="100dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sheshidu"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/degree_text"
+                    android:text="℃"
+                    android:textColor="#fff"
+                    android:textSize="40sp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/feng_text"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:textColor="#fff"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/shi_text"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#fff"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/ya_text"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:textColor="#fff"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/zui_ms"
+                    android:gravity="center"
+                    android:text="m/s"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/hpc"
+                    android:gravity="center"
+                    android:text="%"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/hpa"
+                    android:gravity="center"
+                    android:text="hpa"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="25dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/feng"
+                    android:gravity="center"
+                    android:text="最大风速"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/shi"
+                    android:gravity="center"
+                    android:text="相对湿度"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/ya"
+                    android:gravity="center"
+                    android:text="气压"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/d_s_text"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:text="最大风速的风向："/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/d_s"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:layout_toRightOf="@id/d_s_text"
+                        android:layout_marginLeft="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/zui_du"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:text="°"
+                        android:layout_toRightOf="@id/d_s"
+                        android:layout_marginLeft="5dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/s_inst_text"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:text="极大风速："/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/s_inst"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:layout_toRightOf="@id/s_inst_text"
+                        android:layout_marginLeft="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ji_ms"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:text="m/s"
+                        android:layout_toRightOf="@id/s_inst"
+                        android:layout_marginLeft="5dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/d_inst_text"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:text="极大风速的风向："/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/d_inst"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:layout_toRightOf="@id/d_inst_text"
+                        android:layout_marginLeft="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ji_du"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:text="°"
+                        android:layout_toRightOf="@id/d_inst"
+                        android:layout_marginLeft="5dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/s_avg_text"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:text="2分钟平均风速："/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/s_avg"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:layout_toRightOf="@id/s_avg_text"
+                        android:layout_marginLeft="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ms_2min"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:text="m/s"
+                        android:layout_toRightOf="@id/s_avg"
+                        android:layout_marginLeft="5dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/d_avg_text"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:text="2分钟平均风速的风向："/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/d_avg"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:layout_toRightOf="@id/d_avg_text"
+                        android:layout_marginLeft="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/du_2min"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:text="°"
+                        android:layout_toRightOf="@id/d_avg"
+                        android:layout_marginLeft="5dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rhu_min_text"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:text="相对最小湿度："/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rhu_min"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:layout_toRightOf="@id/rhu_min_text"
+                        android:layout_marginLeft="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/hpc_min"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:text="%"
+                        android:layout_toRightOf="@id/rhu_min"
+                        android:layout_marginLeft="5dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/pre_1h_text"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:text="过去一小时降雨量："/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/pre_1h"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:layout_toRightOf="@id/pre_1h"
+                        android:layout_marginLeft="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/mm"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:text="mm"
+                        android:layout_toRightOf="@id/pre_1h"
+                        android:layout_marginLeft="5dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/prs_max_text"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:text="最高气压："/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/prs_max"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:layout_toRightOf="@id/prs_max_text"
+                        android:layout_marginLeft="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/hpa_max"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:text="hpa"
+                        android:layout_toRightOf="@id/prs_max"
+                        android:layout_marginLeft="5dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/prs_min_text"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:text="最高气压："/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/prs_min"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:layout_toRightOf="@id/prs_min_text"
+                        android:layout_marginLeft="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/hpa_min"
+                        android:textSize="15sp"
+                        android:textColor="#fff"
+                        android:text="hpa"
+                        android:layout_toRightOf="@id/prs_min"
+                        android:layout_marginLeft="5dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/prs_sea_text"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:text="海平面气压："/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/prs_sea"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:layout_toRightOf="@id/prs_sea_text"
+                        android:layout_marginLeft="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/hpa_sea"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:text="hpa"
+                        android:layout_toRightOf="@id/prs_sea"
+                        android:layout_marginLeft="5dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/vap_text"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:text="水汽压："/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/vap"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:layout_toRightOf="@id/vap_text"
+                        android:layout_marginLeft="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/hpa_vpa"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:text="hpa"
+                        android:layout_toRightOf="@id/vap"
+                        android:layout_marginLeft="5dp"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>
