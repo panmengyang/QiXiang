@@ -68,10 +68,17 @@ public class ChooseAreaFragment extends Fragment{
                 }
                 else if (currentLevel == LEVEL_COUNTY) {
                     String stationId = countyList.get(position).getStationId();
-                    Intent intent = new Intent(getActivity(),QixiangActivity.class);
-                    intent.putExtra("station_id",stationId);
-                    startActivity(intent);
-                    getActivity().finish();
+                    if (getActivity() instanceof MainActivity) {
+                        Intent intent = new Intent(getActivity(),QixiangActivity.class);
+                        intent.putExtra("station_id",stationId);
+                        startActivity(intent);
+                        getActivity().finish();
+                    } else if (getActivity() instanceof QixiangActivity) {
+                        QixiangActivity activity = (QixiangActivity) getActivity();
+                        activity.drawerLayout.closeDrawers();
+                        activity.swipeRefreshLayout.setRefreshing(true);
+                        activity.requestQiXiang(stationId);
+                    }
                 }
             }
         });

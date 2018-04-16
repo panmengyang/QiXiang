@@ -4,9 +4,14 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -27,6 +32,12 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class QixiangActivity extends AppCompatActivity {
+
+    public DrawerLayout drawerLayout;
+
+    private Button navButton;
+
+    public SwipeRefreshLayout swipeRefreshLayout;
 
     private ScrollView qixiangLayout;
 
@@ -114,16 +125,36 @@ public class QixiangActivity extends AppCompatActivity {
         vapText = findViewById(R.id.vap_text);
         vap = findViewById(R.id.vap);
         hpaVap = findViewById(R.id.hpa_vpa);
+        swipeRefreshLayout = findViewById(R.id.swipe_fresh);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navButton = findViewById(R.id.nav_button);
+
+        navButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String qixiangString = prefs.getString("ds",null);
+        final String stationId;
         if (qixiangString != null) {
             DS ds = Utility.handleQiXiangResponse(qixiangString);
+            stationId = ds.Station_Id_C;
             showQiXiangInfo(ds);
         } else {
-            String stationId = getIntent().getStringExtra("station_id");
+            stationId = getIntent().getStringExtra("station_id");
             qixiangLayout.setVisibility(View.INVISIBLE);
             requestQiXiang(stationId);
         }
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                requestQiXiang(stationId);
+            }
+        });
 
         String bingPic = prefs.getString("bing_pic", null);
         if (bingPic != null) {
@@ -146,6 +177,7 @@ public class QixiangActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Toast.makeText(QixiangActivity.this,"获取气象信息失败",Toast.LENGTH_SHORT).show();
+                        swipeRefreshLayout.setRefreshing(false);
                     }
                 });
             }
@@ -165,6 +197,7 @@ public class QixiangActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(QixiangActivity.this,"获取气象信息失败",Toast.LENGTH_SHORT).show();
                         }
+                        swipeRefreshLayout.setRefreshing(false);
                     }
                 });
             }
