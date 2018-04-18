@@ -11,9 +11,9 @@
         android:scaleType="centerCrop" />
 
     <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/drawer_layout">
+        android:layout_height="match_parent">
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipe_fresh"
@@ -37,15 +37,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize">
 
-                        <Button
-                            android:id="@+id/nav_button"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="20dp"
-                            android:background="@drawable/ic_list"/>
-
                         <TextView
                             android:id="@+id/title_city"
                             android:layout_width="match_parent"
@@ -54,32 +45,87 @@
                             android:textColor="#fff"
                             android:textSize="20sp" />
 
+                        <Button
+                            android:id="@+id/nav_button"
+                            android:layout_width="48dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="20dp"
+                            android:background="@drawable/icon_list" />
+
+                        <Button
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:id="@+id/menu_button"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/icon_menu"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/page_now"
+                            android:textColor="#fff"
+                            android:textSize="15sp"
+                            android:text="过去1小时"
+                            android:layout_centerVertical="true"
+                            android:layout_toLeftOf="@id/menu_button"/>
+
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="400dp">
 
                         <TextView
                             android:id="@+id/degree_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:paddingBottom="100dp"
-                            android:paddingTop="100dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="180dp"
                             android:textColor="#fff"
-                            android:textSize="80sp" />
+                            android:textSize="70sp" />
 
                         <TextView
-                            android:id="@+id/sheshidu"
+                            android:id="@+id/time_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="10dp"
-                            android:layout_toRightOf="@id/degree_text"
-                            android:text="℃"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="15dp"
+                            android:text="发布时间(GMT)："
                             android:textColor="#fff"
-                            android:textSize="40sp" />
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/time_text"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="10dp"
+                            android:textColor="#fff"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/tem_max"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginRight="15dp"
+                            android:textColor="#fff"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:id="@+id/tem_min"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_below="@id/tem_max"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="10dp"
+                            android:textColor="#fff"
+                            android:textSize="25sp" />
 
                     </RelativeLayout>
 
@@ -410,7 +456,7 @@
                                 android:id="@+id/pre_1h_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="过去一小时降雨量："
+                                android:text="降雨量："
                                 android:textColor="#fff"
                                 android:textSize="15sp" />
 
@@ -478,7 +524,7 @@
                                 android:id="@+id/prs_min_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="最高气压："
+                                android:text="最低气压："
                                 android:textColor="#fff"
                                 android:textSize="15sp" />
 
@@ -580,10 +626,10 @@
         </android.support.v4.widget.SwipeRefreshLayout>
 
         <fragment
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:id="@+id/choose_area_fragment"
             android:name="com.example.qixiang.ChooseAreaFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="start" />
 
     </android.support.v4.widget.DrawerLayout>

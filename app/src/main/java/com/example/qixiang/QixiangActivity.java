@@ -12,8 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +28,9 @@ import com.example.qixiang.util.HttpUtil;
 import com.example.qixiang.util.Utility;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -43,33 +48,37 @@ public class QixiangActivity extends AppCompatActivity {
 
     private ScrollView qixiangLayout;
 
-    private TextView titleCity,degreeText,sheshidu;
+    private TextView titleCity, degreeText, Time, temMax, temMin;
 
-    private TextView fengText,shiText,yaText,zuims,hpa,hpc,feng,shi,ya;
+    private TextView fengText, shiText, yaText;
 
-    private TextView dsText,winds,zuidu;
+    private TextView winds;
 
-    private TextView sInstText,sInst,jims;
+    private TextView sInst;
 
-    private TextView dInstText,dInst,jidu;
+    private TextView dInst;
 
-    private TextView sAvgText,sAvg,ms2min;
+    private TextView sAvg;
 
-    private TextView dAvgText,dAvg,du2min;
+    private TextView dAvg;
 
-    private TextView rhuMinText,rhuMin,hpcMin;
+    private TextView rhuMin;
 
-    private TextView pre1hText,pre1h,mm;
+    private TextView pre1h;
 
-    private TextView prsMaxText,prsMax,hpaMax;
+    private TextView prsMax;
 
-    private TextView prsMinText,prsMin,hpaMin;
+    private TextView prsMin;
 
-    private TextView prsSeaText,prsSea,hpaSea;
+    private TextView prsSea;
 
-    private TextView vapText,vap,hpaVap;
+    private TextView vap;
 
     private ImageView bingPicImg;
+
+    private Button popButton;
+
+    private PopupWindow myPop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,53 +89,43 @@ public class QixiangActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qixiang);
+        popButton = findViewById(R.id.menu_button);
+        popButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View view = getLayoutInflater().inflate(R.layout.layout_pop, null);
+                myPop = new PopupWindow(view, 335, ViewGroup.LayoutParams.WRAP_CONTENT);
+//                TextView h1 = view.findViewById(R.id.tv_1h);
+//                TextView h3 = view.findViewById(R.id.tv_3h);
+//                TextView h6 = view.findViewById(R.id.tv_6h);
+//                TextView h12 = view.findViewById(R.id.tv_12h);
+//                TextView h24 = view.findViewById(R.id.tv_24h);
+                myPop.setOutsideTouchable(true);
+                myPop.setFocusable(true);
+                myPop.showAsDropDown(popButton);
+            }
+        });
         bingPicImg = findViewById(R.id.bing_pic_img);
         qixiangLayout = findViewById(R.id.qixiang_layout);
         titleCity = findViewById(R.id.title_city);
+        Time = findViewById(R.id.time);
+        temMax = findViewById(R.id.tem_max);
+        temMin = findViewById(R.id.tem_min);
         degreeText = findViewById(R.id.degree_text);
-        sheshidu = findViewById(R.id.sheshidu);
         fengText = findViewById(R.id.feng_text);
-        feng = findViewById(R.id.feng);
-        zuims = findViewById(R.id.zui_ms);
         shiText = findViewById(R.id.shi_text);
-        shi = findViewById(R.id.shi);
-        hpc = findViewById(R.id.hpc);
         yaText = findViewById(R.id.ya_text);
-        ya = findViewById(R.id.ya);
-        hpa = findViewById(R.id.hpa);
-        dsText = findViewById(R.id.d_s_text);
         winds = findViewById(R.id.d_s);
-        zuidu = findViewById(R.id.zui_du);
-        sInstText = findViewById(R.id.s_inst_text);
         sInst = findViewById(R.id.s_inst);
-        jims = findViewById(R.id.ji_ms);
-        dInstText = findViewById(R.id.d_inst_text);
         dInst = findViewById(R.id.d_inst);
-        jidu = findViewById(R.id.ji_du);
-        sAvgText = findViewById(R.id.s_avg_text);
         sAvg = findViewById(R.id.s_avg);
-        du2min = findViewById(R.id.du_2min);
-        dAvgText = findViewById(R.id.d_avg_text);
         dAvg = findViewById(R.id.d_avg);
-        jidu = findViewById(R.id.ji_du);
-        rhuMinText = findViewById(R.id.rhu_min_text);
         rhuMin = findViewById(R.id.rhu_min);
-        hpcMin = findViewById(R.id.hpc_min);
-        pre1hText = findViewById(R.id.pre_1h_text);
         pre1h = findViewById(R.id.pre_1h);
-        mm = findViewById(R.id.mm);
-        prsMaxText = findViewById(R.id.prs_max_text);
         prsMax = findViewById(R.id.prs_max);
-        hpaMax = findViewById(R.id.hpa_max);
-        prsMinText = findViewById(R.id.prs_min_text);
         prsMin = findViewById(R.id.prs_min);
-        hpaMin = findViewById(R.id.hpa_min);
-        prsSeaText = findViewById(R.id.prs_sea_text);
         prsSea = findViewById(R.id.prs_sea);
-        hpaSea = findViewById(R.id.hpa_sea);
-        vapText = findViewById(R.id.vap_text);
         vap = findViewById(R.id.vap);
-        hpaVap = findViewById(R.id.hpa_vpa);
         swipeRefreshLayout = findViewById(R.id.swipe_fresh);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -140,7 +139,7 @@ public class QixiangActivity extends AppCompatActivity {
         });
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String qixiangString = prefs.getString("ds",null);
+        String qixiangString = prefs.getString("ds", null);
         final String stationId;
         if (qixiangString != null) {
             DS ds = Utility.handleQiXiangResponse(qixiangString);
@@ -161,7 +160,7 @@ public class QixiangActivity extends AppCompatActivity {
         String bingPic = prefs.getString("bing_pic", null);
         if (bingPic != null) {
             Glide.with(this).load(bingPic).into(bingPicImg);
-        }else {
+        } else {
             loadBingPic();
         }
     }
@@ -169,8 +168,9 @@ public class QixiangActivity extends AppCompatActivity {
     public void requestQiXiang(final String stationId) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHH");
         Date date = new Date();
-        String time = formatter.format(date);
-        String qixiangUrl = "http://api.data.cma.cn:8090/api?userId=523519206344vZKdh&pwd=o0pX1o1&dataFormat=json&interfaceId=getSurfEleByTimeRangeAndStaID&timeRange=[" + time + "0000," + time +"0000]&staIDs=" + stationId + "&elements=Station_Id_C,Year,Mon,Day,Hour,PRS,PRS_Sea,PRS_Max,PRS_Min,TEM,TEM_Max,TEM_Min,RHU,RHU_Min,VAP,PRE_1h,WIN_D_INST_Max,WIN_S_Max,WIN_D_S_Max,WIN_S_Avg_2mi,WIN_D_Avg_2mi,WEP_Now,WIN_S_INST_Max&dataCode=SURF_CHN_MUL_HOR";
+        Date date2 = new Date(date.getTime() - (long) 9 * 60 * 60 * 1000);
+        String time = formatter.format(date2);
+        String qixiangUrl = "http://api.data.cma.cn:8090/api?userId=523519206344vZKdh&pwd=o0pX1o1&dataFormat=json&interfaceId=getSurfEleByTimeRangeAndStaID&timeRange=[" + time + "0000," + time + "0000]&staIDs=" + stationId + "&elements=Station_Id_C,Year,Mon,Day,Hour,PRS,PRS_Sea,PRS_Max,PRS_Min,TEM,TEM_Max,TEM_Min,RHU,RHU_Min,VAP,PRE_1h,WIN_D_INST_Max,WIN_S_Max,WIN_D_S_Max,WIN_S_Avg_2mi,WIN_D_Avg_2mi,WEP_Now,WIN_S_INST_Max&dataCode=SURF_CHN_MUL_HOR";
         HttpUtil.sendOkHttpRequest(qixiangUrl, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -178,7 +178,7 @@ public class QixiangActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(QixiangActivity.this,"获取气象信息失败",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QixiangActivity.this, "获取气象信息失败", Toast.LENGTH_SHORT).show();
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 });
@@ -197,7 +197,7 @@ public class QixiangActivity extends AppCompatActivity {
                             editor.apply();
                             showQiXiangInfo(ds);
                         } else {
-                            Toast.makeText(QixiangActivity.this,"获取气象信息失败",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(QixiangActivity.this, "获取气象信息失败", Toast.LENGTH_SHORT).show();
                         }
                         swipeRefreshLayout.setRefreshing(false);
                     }
@@ -208,7 +208,7 @@ public class QixiangActivity extends AppCompatActivity {
     }
 
     public void loadBingPic() {
-        String requestBingPic = "http://10.12.51.15/bing_pic";
+        String requestBingPic = "http://2064159yj6.iask.in:48415/bing_pic";
         HttpUtil.sendOkHttpRequest(requestBingPic, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -219,7 +219,7 @@ public class QixiangActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 final String bingPic = response.body().string();
                 SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(QixiangActivity.this).edit();
-                editor.putString("bing_pic",bingPic);
+                editor.putString("bing_pic", bingPic);
                 editor.apply();
                 runOnUiThread(new Runnable() {
                     @Override
@@ -231,10 +231,13 @@ public class QixiangActivity extends AppCompatActivity {
         });
     }
 
-    private void showQiXiangInfo(DS ds){
+    private void showQiXiangInfo(DS ds) {
         if (ds != null) {
+            String hour = ds.Mon + "月" + ds.Day + "日" + ds.Hour + "时";
+            String temmax = ds.TEM_Max + "°/";
+            String temmin = ds.TEM_Min + "°";
             String stationName = ds.Station_Id_C;
-            String degree = ds.TEM;
+            String degree = ds.TEM + "°";
             String fengtext = ds.WIN_S_Max;
             String shitext = ds.RHU;
             String yatext = ds.PRS;
@@ -249,6 +252,9 @@ public class QixiangActivity extends AppCompatActivity {
             String prsmin = ds.PRS_Min;
             String prssea = ds.PRS_Sea;
             String vap1 = ds.VAP;
+            Time.setText(hour);
+            temMax.setText(temmax);
+            temMin.setText(temmin);
             titleCity.setText(stationName);
             degreeText.setText(degree);
             fengText.setText(fengtext);
@@ -269,7 +275,7 @@ public class QixiangActivity extends AppCompatActivity {
             Intent intent = new Intent(this, AutoUpdateService.class);
             startService(intent);
         } else {
-            Toast.makeText(QixiangActivity.this,"获取气象信息失败",Toast.LENGTH_SHORT).show();
+            Toast.makeText(QixiangActivity.this, "获取气象信息失败", Toast.LENGTH_SHORT).show();
         }
     }
 }

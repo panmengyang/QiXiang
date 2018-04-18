@@ -31,7 +31,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class ChooseAreaFragment extends Fragment{
+public class ChooseAreaFragment extends android.support.v4.app.Fragment{
     public static final int LEVEL_CITY = 0;
     public static final int LEVEL_COUNTY = 1;
     private ProgressDialog progressDialog;
@@ -105,7 +105,7 @@ public class ChooseAreaFragment extends Fragment{
             listView.setSelection(0);
             currentLevel = LEVEL_CITY;
         } else {
-            String address = "http://10.12.51.15";
+            String address = "http://2064159yj6.iask.in:48415";
             queryFromServer(address, "city");
         }
     }
@@ -123,7 +123,7 @@ public class ChooseAreaFragment extends Fragment{
             currentLevel = LEVEL_COUNTY;
         } else {
             int cityCode = selectedCity.getCityCode();
-            String address = "http://10.12.51.15/"+cityCode;
+            String address = "http://2064159yj6.iask.in:48415/"+cityCode;
             queryFromServer(address, "county");
         }
     }
