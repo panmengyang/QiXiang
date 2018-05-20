@@ -10,27 +10,20 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.qixiang.gson.DS;
-import com.example.qixiang.gson.QiXiang;
 import com.example.qixiang.service.AutoUpdateService;
 import com.example.qixiang.util.HttpUtil;
 import com.example.qixiang.util.Utility;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -74,11 +67,13 @@ public class QixiangActivity extends AppCompatActivity {
 
     private TextView vap;
 
-    private ImageView bingPicImg;
-
     private Button popButton;
 
     private PopupWindow myPop;
+
+    private TextView pageNow;
+
+    private TextView s;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,18 +89,41 @@ public class QixiangActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 View view = getLayoutInflater().inflate(R.layout.layout_pop, null);
-                myPop = new PopupWindow(view, 335, ViewGroup.LayoutParams.WRAP_CONTENT);
-//                TextView h1 = view.findViewById(R.id.tv_1h);
-//                TextView h3 = view.findViewById(R.id.tv_3h);
-//                TextView h6 = view.findViewById(R.id.tv_6h);
-//                TextView h12 = view.findViewById(R.id.tv_12h);
-//                TextView h24 = view.findViewById(R.id.tv_24h);
+                myPop = new PopupWindow(view,ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                final TextView h1 = view.findViewById(R.id.tv_1h);
+                final String stationId = (String) titleCity.getText();
+                pageNow = findViewById(R.id.page_now);
+                h1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        myPop.dismiss();
+                        pageNow.setText(h1.getText());
+                        requestQiXiang(stationId);
+                    }
+                });
+                final TextView h3 = view.findViewById(R.id.tv_3h);
+                h3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        myPop.dismiss();
+                        pageNow.setText(h3.getText());
+                        requestQixiang1(stationId);
+                    }
+                });
+                final TextView h6 = view.findViewById(R.id.tv_6h);
+                h6.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        myPop.dismiss();
+                        pageNow.setText(h6.getText());
+                        requestQixiang2(stationId);
+                    }
+                });
                 myPop.setOutsideTouchable(true);
                 myPop.setFocusable(true);
                 myPop.showAsDropDown(popButton);
             }
         });
-        bingPicImg = findViewById(R.id.bing_pic_img);
         qixiangLayout = findViewById(R.id.qixiang_layout);
         titleCity = findViewById(R.id.title_city);
         Time = findViewById(R.id.time);
@@ -126,6 +144,7 @@ public class QixiangActivity extends AppCompatActivity {
         prsMin = findViewById(R.id.prs_min);
         prsSea = findViewById(R.id.prs_sea);
         vap = findViewById(R.id.vap);
+        s = findViewById(R.id.zuifeng);
         swipeRefreshLayout = findViewById(R.id.swipe_fresh);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -156,13 +175,6 @@ public class QixiangActivity extends AppCompatActivity {
                 requestQiXiang(stationId);
             }
         });
-
-        String bingPic = prefs.getString("bing_pic", null);
-        if (bingPic != null) {
-            Glide.with(this).load(bingPic).into(bingPicImg);
-        } else {
-            loadBingPic();
-        }
     }
 
     public void requestQiXiang(final String stationId) {
@@ -170,7 +182,7 @@ public class QixiangActivity extends AppCompatActivity {
         Date date = new Date();
         Date date2 = new Date(date.getTime() - (long) 9 * 60 * 60 * 1000);
         String time = formatter.format(date2);
-        String qixiangUrl = "http://api.data.cma.cn:8090/api?userId=523519206344vZKdh&pwd=o0pX1o1&dataFormat=json&interfaceId=getSurfEleByTimeRangeAndStaID&timeRange=[" + time + "0000," + time + "0000]&staIDs=" + stationId + "&elements=Station_Id_C,Year,Mon,Day,Hour,PRS,PRS_Sea,PRS_Max,PRS_Min,TEM,TEM_Max,TEM_Min,RHU,RHU_Min,VAP,PRE_1h,WIN_D_INST_Max,WIN_S_Max,WIN_D_S_Max,WIN_S_Avg_2mi,WIN_D_Avg_2mi,WEP_Now,WIN_S_INST_Max&dataCode=SURF_CHN_MUL_HOR";
+        String qixiangUrl = "http://api.data.cma.cn:8090/api?userId=526367972657YAM8a&pwd=xoBmRsd&dataFormat=json&interfaceId=getSurfEleByTimeRangeAndStaID&timeRange=[" + time + "0000," + time + "0000]&staIDs=" + stationId + "&elements=TEM,TEM_Max,TEM_Min,tigan,PRS,PRS_Sea,PRS_Max,PRS_Min,VAP,RHU,RHU_Min,windpower,WIN_D_Avg_2mi,WIN_D_S_Max,WIN_S_Max,WIN_D_INST_Max,WIN_S_Inst_Max,WIN_S_Avg_2mi,PRE_1h,VIS,CLO_Cov,CLO_Cov_Low,CLO_COV_LM,WEP_Now,Station_Id_C,Year,Mon,Day,Hour&dataCode=SURF_CHN_MUL_HOR";
         HttpUtil.sendOkHttpRequest(qixiangUrl, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -204,27 +216,84 @@ public class QixiangActivity extends AppCompatActivity {
                 });
             }
         });
-        loadBingPic();
     }
 
-    public void loadBingPic() {
-        String requestBingPic = "http://2064159yj6.iask.in:48415/bing_pic";
-        HttpUtil.sendOkHttpRequest(requestBingPic, new Callback() {
+    public void requestQixiang1 (final String stationId) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHH");
+        Date date = new Date();
+        Date date1 = new Date(date.getTime() - (long) 10 * 60 * 60 * 1000);
+        String time1 = formatter.format(date1);
+        String qixiangUrl = "http://api.data.cma.cn:8090/api?userId=526367972657YAM8a&pwd=xoBmRsd&dataFormat=json&interfaceId=getSurfEleByTimeRangeAndStaID&timeRange=[" + time1 + "0000," + time1 + "0000]&staIDs=" + stationId + "&elements=TEM,TEM_Max,TEM_Min,tigan,PRS,PRS_Sea,PRS_Max,PRS_Min,VAP,RHU,RHU_Min,windpower,WIN_D_Avg_2mi,WIN_D_S_Max,WIN_S_Max,WIN_D_INST_Max,WIN_S_Inst_Max,WIN_S_Avg_2mi,PRE_1h,VIS,CLO_Cov,CLO_Cov_Low,CLO_COV_LM,WEP_Now,Station_Id_C,Year,Mon,Day,Hour&dataCode=SURF_CHN_MUL_HOR";
+        HttpUtil.sendOkHttpRequest(qixiangUrl, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(QixiangActivity.this, "获取气象信息失败", Toast.LENGTH_SHORT).show();
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                });
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                final String bingPic = response.body().string();
-                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(QixiangActivity.this).edit();
-                editor.putString("bing_pic", bingPic);
-                editor.apply();
+                final String responseText = response.body().string();
+                final DS ds = Utility.handleQiXiangResponse(responseText);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Glide.with(QixiangActivity.this).load(bingPic).into(bingPicImg);
+                        if (ds != null) {
+                            SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(QixiangActivity.this).edit();
+                            editor.putString("ds", responseText);
+                            editor.apply();
+                            showQiXiangInfo(ds);
+                        } else {
+                            Toast.makeText(QixiangActivity.this, "获取气象信息失败", Toast.LENGTH_SHORT).show();
+                        }
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                });
+            }
+        });
+    }
+
+    public void requestQixiang2 (final String stationId) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHH");
+        Date date = new Date();
+        Date date1 = new Date(date.getTime() - (long) 11 * 60 * 60 * 1000);
+        String time = formatter.format(date1);
+        String qixiangUrl = "http://api.data.cma.cn:8090/api?userId=526367972657YAM8a&pwd=xoBmRsd&dataFormat=json&interfaceId=getSurfEleByTimeRangeAndStaID&timeRange=[" + time + "0000," + time + "0000]&staIDs=" + stationId + "&elements=TEM,TEM_Max,TEM_Min,tigan,PRS,PRS_Sea,PRS_Max,PRS_Min,VAP,RHU,RHU_Min,windpower,WIN_D_Avg_2mi,WIN_D_S_Max,WIN_S_Max,WIN_D_INST_Max,WIN_S_Inst_Max,WIN_S_Avg_2mi,PRE_1h,VIS,CLO_Cov,CLO_Cov_Low,CLO_COV_LM,WEP_Now,Station_Id_C,Year,Mon,Day,Hour&dataCode=SURF_CHN_MUL_HOR";
+        HttpUtil.sendOkHttpRequest(qixiangUrl, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(QixiangActivity.this, "获取气象信息失败", Toast.LENGTH_SHORT).show();
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                final String responseText = response.body().string();
+                final DS ds = Utility.handleQiXiangResponse(responseText);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (ds != null) {
+                            SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(QixiangActivity.this).edit();
+                            editor.putString("ds", responseText);
+                            editor.apply();
+                            showQiXiangInfo(ds);
+                        } else {
+                            Toast.makeText(QixiangActivity.this, "获取气象信息失败", Toast.LENGTH_SHORT).show();
+                        }
+                        swipeRefreshLayout.setRefreshing(false);
                     }
                 });
             }
@@ -233,16 +302,19 @@ public class QixiangActivity extends AppCompatActivity {
 
     private void showQiXiangInfo(DS ds) {
         if (ds != null) {
-            String hour = ds.Mon + "月" + ds.Day + "日" + ds.Hour + "时";
+            SimpleDateFormat formatter = new SimpleDateFormat("MM月dd日HH时");
+            Date date = new Date();
+            Date date2 = new Date(date.getTime() - (long) 60 * 60 * 1000);
+            String time = formatter.format(date2);
             String temmax = ds.TEM_Max + "°/";
             String temmin = ds.TEM_Min + "°";
-            String stationName = ds.Station_Id_C;
+            String stationName = "区站号：" + ds.Station_Id_C;
             String degree = ds.TEM + "°";
             String fengtext = ds.WIN_S_Max;
             String shitext = ds.RHU;
             String yatext = ds.PRS;
             String dsmax = ds.WIN_D_S_Max;
-            String sinstmax = ds.WIN_S_INST_Max;
+            String sinstmax = ds.WIN_S_Inst_Max;
             String dinstmax = ds.WIN_D_INST_Max;
             String savg = ds.WIN_S_Avg_2mi;
             String davg = ds.WIN_D_Avg_2mi;
@@ -252,12 +324,14 @@ public class QixiangActivity extends AppCompatActivity {
             String prsmin = ds.PRS_Min;
             String prssea = ds.PRS_Sea;
             String vap1 = ds.VAP;
-            Time.setText(hour);
+            String fengli = ds.windpower;
+            s.setText(fengtext);
+            Time.setText(time);
             temMax.setText(temmax);
             temMin.setText(temmin);
             titleCity.setText(stationName);
             degreeText.setText(degree);
-            fengText.setText(fengtext);
+            fengText.setText(fengli);
             shiText.setText(shitext);
             yaText.setText(yatext);
             winds.setText(dsmax);

@@ -4,7 +4,6 @@ import android.text.TextUtils;
 import com.example.qixiang.db.City;
 import com.example.qixiang.db.County;
 import com.example.qixiang.gson.DS;
-import com.example.qixiang.gson.QiXiang;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;

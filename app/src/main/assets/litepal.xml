@@ -6,5 +6,6 @@
     <list>
         <mapping class="com.example.qixiang.db.City"/>
         <mapping class="com.example.qixiang.db.County"/>
+        <mapping class="com.example.qixiang.db.User"/>
     </list>
 </litepal>

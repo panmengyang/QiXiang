@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#efffffff">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_1h"
         android:textSize="15sp"
-        android:text="过去1小时"
+        android:text="当前"
         android:padding="10dp"/>
 
     <View
@@ -19,11 +19,11 @@
         android:background="#CCCCCC"/>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_3h"
         android:textSize="15sp"
-        android:text="过去3小时"
+        android:text="1小时前"
         android:padding="10dp"/>
 
     <View
@@ -32,37 +32,11 @@
         android:background="#CCCCCC"/>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_6h"
         android:textSize="15sp"
-        android:text="过去6小时"
-        android:padding="10dp"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#CCCCCC"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_12h"
-        android:textSize="15sp"
-        android:text="过去12小时"
-        android:padding="10dp"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#CCCCCC"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_24h"
-        android:textSize="15sp"
-        android:text="过去24小时"
+        android:text="2小时前"
         android:padding="10dp"/>
 
 </LinearLayout>

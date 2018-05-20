@@ -1,18 +1,8 @@
 package com.example.qixiang.gson;
 
-import java.text.DecimalFormat;
-
 public class DS {
 
     public String Station_Id_C;
-
-    public String Year;
-
-    public String Mon;
-
-    public String Day;
-
-    public String Hour;
 
     public String PRS;
 
@@ -46,8 +36,12 @@ public class DS {
 
     public String WIN_D_Avg_2mi;
 
-    public String WEP_Now;
+    public String WIN_S_Inst_Max;
 
-    public String WIN_S_INST_Max;
+    public String tigan;
+
+    public String windpower;
+
+    public String VIS;
 
 }
