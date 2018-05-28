@@ -1,6 +1,5 @@
 package com.example.qixiang;
 
-import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.qixiang.R;
 import com.example.qixiang.db.City;
 import com.example.qixiang.db.County;
 import com.example.qixiang.util.HttpUtil;

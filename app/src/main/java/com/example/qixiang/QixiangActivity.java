@@ -41,7 +41,7 @@ public class QixiangActivity extends AppCompatActivity {
 
     private ScrollView qixiangLayout;
 
-    private TextView titleCity, degreeText, Time, temMax, temMin;
+    private TextView titleCity, degreeText, Time, temMax, temMin, tiganText;
 
     private TextView fengText, shiText, yaText;
 
@@ -75,6 +75,8 @@ public class QixiangActivity extends AppCompatActivity {
 
     private TextView s;
 
+    private TextView visText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (Build.VERSION.SDK_INT >= 21) {
@@ -89,7 +91,7 @@ public class QixiangActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 View view = getLayoutInflater().inflate(R.layout.layout_pop, null);
-                myPop = new PopupWindow(view,ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                myPop = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 final TextView h1 = view.findViewById(R.id.tv_1h);
                 final String stationId = (String) titleCity.getText();
                 pageNow = findViewById(R.id.page_now);
@@ -116,7 +118,7 @@ public class QixiangActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         myPop.dismiss();
                         pageNow.setText(h6.getText());
-                        requestQixiang2(stationId);
+                        requestQiXiang2(stationId);
                     }
                 });
                 myPop.setOutsideTouchable(true);
@@ -145,6 +147,8 @@ public class QixiangActivity extends AppCompatActivity {
         prsSea = findViewById(R.id.prs_sea);
         vap = findViewById(R.id.vap);
         s = findViewById(R.id.zuifeng);
+        tiganText = findViewById(R.id.tigan_text);
+        visText = findViewById(R.id.vis);
         swipeRefreshLayout = findViewById(R.id.swipe_fresh);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -180,9 +184,9 @@ public class QixiangActivity extends AppCompatActivity {
     public void requestQiXiang(final String stationId) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHH");
         Date date = new Date();
-        Date date2 = new Date(date.getTime() - (long) 9 * 60 * 60 * 1000);
-        String time = formatter.format(date2);
-        String qixiangUrl = "http://api.data.cma.cn:8090/api?userId=526367972657YAM8a&pwd=xoBmRsd&dataFormat=json&interfaceId=getSurfEleByTimeRangeAndStaID&timeRange=[" + time + "0000," + time + "0000]&staIDs=" + stationId + "&elements=TEM,TEM_Max,TEM_Min,tigan,PRS,PRS_Sea,PRS_Max,PRS_Min,VAP,RHU,RHU_Min,windpower,WIN_D_Avg_2mi,WIN_D_S_Max,WIN_S_Max,WIN_D_INST_Max,WIN_S_Inst_Max,WIN_S_Avg_2mi,PRE_1h,VIS,CLO_Cov,CLO_Cov_Low,CLO_COV_LM,WEP_Now,Station_Id_C,Year,Mon,Day,Hour&dataCode=SURF_CHN_MUL_HOR";
+        Date date1 = new Date(date.getTime() - (long) 9 * 60 * 60 * 1000);
+        String time = formatter.format(date1);
+        String qixiangUrl = "http://api.data.cma.cn:8090/api?userId=527413713427Xmdhn&pwd=TfXLIIx&dataFormat=json&interfaceId=getSurfEleByTimeRangeAndStaID&timeRange=[" + time + "0000," + time + "0000]&staIDs=" + stationId + "&elements=TEM,TEM_Max,TEM_Min,tigan,PRS,PRS_Sea,PRS_Max,PRS_Min,VAP,RHU,RHU_Min,windpower,WIN_D_Avg_2mi,WIN_D_S_Max,WIN_S_Max,WIN_D_INST_Max,WIN_S_Inst_Max,WIN_S_Avg_2mi,PRE_1h,VIS,CLO_Cov,CLO_Cov_Low,CLO_COV_LM,WEP_Now,Station_Id_C,Year,Mon,Day,Hour&dataCode=SURF_CHN_MUL_HOR";
         HttpUtil.sendOkHttpRequest(qixiangUrl, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -218,12 +222,12 @@ public class QixiangActivity extends AppCompatActivity {
         });
     }
 
-    public void requestQixiang1 (final String stationId) {
+    public void requestQixiang1(final String stationId) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHH");
         Date date = new Date();
         Date date1 = new Date(date.getTime() - (long) 10 * 60 * 60 * 1000);
-        String time1 = formatter.format(date1);
-        String qixiangUrl = "http://api.data.cma.cn:8090/api?userId=526367972657YAM8a&pwd=xoBmRsd&dataFormat=json&interfaceId=getSurfEleByTimeRangeAndStaID&timeRange=[" + time1 + "0000," + time1 + "0000]&staIDs=" + stationId + "&elements=TEM,TEM_Max,TEM_Min,tigan,PRS,PRS_Sea,PRS_Max,PRS_Min,VAP,RHU,RHU_Min,windpower,WIN_D_Avg_2mi,WIN_D_S_Max,WIN_S_Max,WIN_D_INST_Max,WIN_S_Inst_Max,WIN_S_Avg_2mi,PRE_1h,VIS,CLO_Cov,CLO_Cov_Low,CLO_COV_LM,WEP_Now,Station_Id_C,Year,Mon,Day,Hour&dataCode=SURF_CHN_MUL_HOR";
+        String time = formatter.format(date1);
+        String qixiangUrl = "http://api.data.cma.cn:8090/api?userId=527413713427Xmdhn&pwd=TfXLIIx&dataFormat=json&interfaceId=getSurfEleByTimeRangeAndStaID&timeRange=[" + time + "0000," + time + "0000]&staIDs=" + stationId + "&elements=TEM,TEM_Max,TEM_Min,tigan,PRS,PRS_Sea,PRS_Max,PRS_Min,VAP,RHU,RHU_Min,windpower,WIN_D_Avg_2mi,WIN_D_S_Max,WIN_S_Max,WIN_D_INST_Max,WIN_S_Inst_Max,WIN_S_Avg_2mi,PRE_1h,VIS,CLO_Cov,CLO_Cov_Low,CLO_COV_LM,WEP_Now,Station_Id_C,Year,Mon,Day,Hour&dataCode=SURF_CHN_MUL_HOR";
         HttpUtil.sendOkHttpRequest(qixiangUrl, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -259,12 +263,12 @@ public class QixiangActivity extends AppCompatActivity {
         });
     }
 
-    public void requestQixiang2 (final String stationId) {
+    public void requestQiXiang2(final String stationId) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHH");
         Date date = new Date();
         Date date1 = new Date(date.getTime() - (long) 11 * 60 * 60 * 1000);
-        String time = formatter.format(date1);
-        String qixiangUrl = "http://api.data.cma.cn:8090/api?userId=526367972657YAM8a&pwd=xoBmRsd&dataFormat=json&interfaceId=getSurfEleByTimeRangeAndStaID&timeRange=[" + time + "0000," + time + "0000]&staIDs=" + stationId + "&elements=TEM,TEM_Max,TEM_Min,tigan,PRS,PRS_Sea,PRS_Max,PRS_Min,VAP,RHU,RHU_Min,windpower,WIN_D_Avg_2mi,WIN_D_S_Max,WIN_S_Max,WIN_D_INST_Max,WIN_S_Inst_Max,WIN_S_Avg_2mi,PRE_1h,VIS,CLO_Cov,CLO_Cov_Low,CLO_COV_LM,WEP_Now,Station_Id_C,Year,Mon,Day,Hour&dataCode=SURF_CHN_MUL_HOR";
+        String time2 = formatter.format(date1);
+        String qixiangUrl = "http://api.data.cma.cn:8090/api?userId=527413713427Xmdhn&pwd=TfXLIIx&dataFormat=json&interfaceId=getSurfEleByTimeRangeAndStaID&timeRange=[" + time2 + "0000," + time2 + "0000]&staIDs=" + stationId + "&elements=TEM,TEM_Max,TEM_Min,tigan,PRS,PRS_Sea,PRS_Max,PRS_Min,VAP,RHU,RHU_Min,windpower,WIN_D_Avg_2mi,WIN_D_S_Max,WIN_S_Max,WIN_D_INST_Max,WIN_S_Inst_Max,WIN_S_Avg_2mi,PRE_1h,VIS,CLO_Cov,CLO_Cov_Low,CLO_COV_LM,WEP_Now,Station_Id_C,Year,Mon,Day,Hour&dataCode=SURF_CHN_MUL_HOR";
         HttpUtil.sendOkHttpRequest(qixiangUrl, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -308,7 +312,7 @@ public class QixiangActivity extends AppCompatActivity {
             String time = formatter.format(date2);
             String temmax = ds.TEM_Max + "°/";
             String temmin = ds.TEM_Min + "°";
-            String stationName = "区站号：" + ds.Station_Id_C;
+            String stationName = ds.Station_Id_C;
             String degree = ds.TEM + "°";
             String fengtext = ds.WIN_S_Max;
             String shitext = ds.RHU;
@@ -325,6 +329,10 @@ public class QixiangActivity extends AppCompatActivity {
             String prssea = ds.PRS_Sea;
             String vap1 = ds.VAP;
             String fengli = ds.windpower;
+            String tigan = "体感温度：" + ds.tigan + "°";
+            String vis = ds.VIS;
+            visText.setText(vis);
+            tiganText.setText(tigan);
             s.setText(fengtext);
             Time.setText(time);
             temMax.setText(temmax);

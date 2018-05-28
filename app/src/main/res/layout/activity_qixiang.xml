@@ -97,13 +97,33 @@
                             android:textSize="70sp" />
 
                         <TextView
-                            android:id="@+id/title_city"
+                            android:id="@+id/tigan_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="5dp"
+                            android:textColor="#fff"
+                            android:textSize="20sp"
+                            android:layout_below="@id/degree_text"/>
+
+                        <TextView
+                            android:id="@+id/title_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
+                            android:text="区站号："
                             android:paddingTop="5dp"
                             android:textColor="#fff"
                             android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/title_city"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:textColor="#fff"
+                            android:textSize="15sp"
+                            android:layout_toRightOf="@+id/title_text"/>
 
                         <TextView
                             android:id="@+id/time_text"
@@ -157,7 +177,7 @@
                             android:id="@+id/feng_text"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_weight="3"
                             android:gravity="center"
                             android:textColor="#fff"
                             android:textSize="30sp" />
@@ -166,7 +186,7 @@
                             android:id="@+id/ya_text"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_weight="4"
                             android:gravity="center"
                             android:textColor="#fff"
                             android:textSize="30sp" />
@@ -175,7 +195,7 @@
                             android:id="@+id/shi_text"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_weight="3"
                             android:gravity="center"
                             android:textColor="#fff"
                             android:textSize="30sp" />
@@ -191,7 +211,7 @@
                             android:id="@+id/zui_ms"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_weight="3"
                             android:gravity="center"
                             android:text="级"
                             android:textColor="#fff"
@@ -201,7 +221,7 @@
                             android:id="@+id/hpa"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_weight="4"
                             android:gravity="center"
                             android:text="hpa"
                             android:textColor="#fff"
@@ -211,7 +231,7 @@
                             android:id="@+id/hpc"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_weight="3"
                             android:gravity="center"
                             android:text="%"
                             android:textColor="#fff"
@@ -229,7 +249,7 @@
                             android:id="@+id/feng"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_weight="3"
                             android:gravity="center"
                             android:text="风力"
                             android:textColor="#fff"
@@ -239,7 +259,7 @@
                             android:id="@+id/ya"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_weight="4"
                             android:gravity="center"
                             android:text="气压"
                             android:textColor="#fff"
@@ -249,7 +269,7 @@
                             android:id="@+id/shi"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_weight="3"
                             android:gravity="center"
                             android:text="相对湿度"
                             android:textColor="#fff"
@@ -646,6 +666,8 @@
                                 android:id="@+id/vap_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
                                 android:text="水汽压："
                                 android:textColor="#fff"
                                 android:textSize="15sp" />
@@ -666,6 +688,42 @@
                                 android:layout_marginLeft="5dp"
                                 android:layout_toRightOf="@id/vap"
                                 android:text="hpa"
+                                android:textColor="#fff"
+                                android:textSize="15sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp">
+
+                            <TextView
+                                android:id="@+id/vis_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:text="水平能见度："
+                                android:textColor="#fff"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/vis"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_toRightOf="@id/vis_text"
+                                android:textColor="#fff"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/mi"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_toRightOf="@id/vis"
+                                android:text="m"
                                 android:textColor="#fff"
                                 android:textSize="15sp" />
 
